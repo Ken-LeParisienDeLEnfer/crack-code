@@ -1,42 +1,42 @@
 const mapping = [{
     letter: 'a',
-    sibblings: ['a', 'b', 'd']
+    siblings: ['a', 'b', 'd']
 },
 {
     letter: 'b',
-    sibblings: ['a', 'b', 'c', 'e']
+    siblings: ['a', 'b', 'c', 'e']
 },
 {
     letter: 'c',
-    sibblings: ['b', 'c', 'f']
+    siblings: ['b', 'c', 'f']
 },
 {
     letter: 'd',
-    sibblings: ['a', 'e', 'd']
+    siblings: ['a', 'e', 'd']
 },
 {
     letter: 'e',
-    sibblings: ['b', 'd', 'e', 'f', 'h']
+    siblings: ['b', 'd', 'e', 'f', 'h']
 },
 {
     letter: 'f',
-    sibblings: ['f', 'c', 'e','i']
+    siblings: ['f', 'c', 'e','i']
 },
 {
     letter: 'g',
-    sibblings: ['g', 'd', 'h']
+    siblings: ['g', 'd', 'h']
 },
 {
     letter: 'h',
-    sibblings: ['e', 'h', 'g', 'i', 'j']
+    siblings: ['e', 'h', 'g', 'i', 'j']
 },
 {
     letter: 'i',
-    sibblings: ['f', 'h', 'i']
+    siblings: ['f', 'h', 'i']
 },
 {
     letter: 'j',
-    sibblings: ['j', 'h']
+    siblings: ['j', 'h']
 }]
 
 function printResult(res) {
@@ -50,25 +50,18 @@ function crackCode(code) {
         if(!siblingLetters) {
             throw new Error(`letter ${letter} does not exist in pad`);
         }
-
         if (!result) {
-            result = siblingLetters.sibblings;
+            result = siblingLetters.siblings;
         } else {
             let temporary = [];
             result.forEach(el => {
-                siblingLetters.sibblings.forEach(sl => {
+                siblingLetters.siblings.forEach(sl => {
                     temporary.push(el + sl);
                 })
             });
             result = temporary;
-        }
-
-        
-
-        
+        }  
     });
-    printResult(result);
 }
 
-
-crackCode("abcd");
+crackCode("hz");
