@@ -43,25 +43,32 @@ function printResult(res) {
     res.forEach(r => console.log(r));
 }
 
-function crackCode(code) {
-    let result = null;
-    code.split('').forEach(letter => {
-        const siblingLetters = mapping.find(map => map.letter === letter);
-        if(!siblingLetters) {
-            throw new Error(`letter ${letter} does not exist in pad`);
-        }
-        if (!result) {
-            result = siblingLetters.siblings;
-        } else {
-            let temporary = [];
-            result.forEach(el => {
-                siblingLetters.siblings.forEach(sl => {
-                    temporary.push(el + sl);
-                })
-            });
-            result = temporary;
-        }  
+function crack(code, index = 0, result = ['']) {
+    if (index === code.length) {
+        return result;
+    }
+
+    const siblingLetters = mapping.find(map => map.letter === code[index]);
+
+    if (!siblingLetters) {
+        throw new Error(`letter ${code[index]} does not exist in pad`);
+    }
+
+    const temporary = [];
+    result.forEach(prefix => {
+        siblingLetters.siblings.forEach(sibling => {
+            temporary.push(prefix + sibling);
+        });
     });
+
+    return crack(code, index + 1, temporary);
 }
 
-crackCode("hz");
+function crackCode(code) {
+    return crack(code.split(''));
+    //printResult(result);
+}
+
+console.time();
+crackCode("cc");
+console.timeEnd();
