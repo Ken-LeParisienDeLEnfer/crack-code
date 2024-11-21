@@ -44,9 +44,6 @@ function printResult(res) {
 }
 
 function crack(code, index = 0, result = ['']) {
-    if (index === code.length) {
-        return result;
-    }
 
     const siblingLetters = mapping.find(map => map.letter === code[index]);
 
@@ -60,15 +57,12 @@ function crack(code, index = 0, result = ['']) {
             temporary.push(prefix + sibling);
         });
     });
-
-    return crack(code, index + 1, temporary);
+    
+    return index === code.length - 1 ? temporary : crack(code, index + 1, temporary);
 }
 
 function crackCode(code) {
     return crack(code.split(''));
-    //printResult(result);
 }
 
-console.time();
-crackCode("cc");
-console.timeEnd();
+crackCode("ab");
