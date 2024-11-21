@@ -62,6 +62,9 @@ function crackCode(code) {
             result = temporary;
         }  
     });
+    return result;
 }
 
-crackCode("hz");
+console.time();
+crackCode("cdfabd");
+console.timeEnd();
